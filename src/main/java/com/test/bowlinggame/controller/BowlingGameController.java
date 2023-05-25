@@ -1,5 +1,6 @@
 package com.test.bowlinggame.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +20,22 @@ import com.test.bowlinggame.entity.GameOutput;
 public class BowlingGameController {
 	
 	@RequestMapping(value="/getbowlingscore", method = RequestMethod.POST)
-	public void getRollingBall(@RequestBody Game game)
+	public ResponseEntity<GameOutput> getRollingBall(@RequestBody Game game)
 	{
-		//GameOutput gameoutput = new GameOutput();
-		String gameString = game.getBowlingGame();
-		System.out.println(">>>>>>>>>>>>>>>>>"+gameString+"<<<<<<<<<<<<<<<<<<<");
+		GameOutput gameoutput = new GameOutput();
+		
+		if (game != null) {
+			String gameString = game.getBowlingGame();
+			
+			String[] frameParts = gameString.split("-");
+			if (frameParts.length != 10) {
+				 gameoutput.setCode(500);
+				 gameoutput.setMessage("Must have 10 frames in complete game");
+				 return new ResponseEntity<GameOutput>(gameoutput, HttpStatus.CONFLICT);
+			}
+		}
+		
+	    return new ResponseEntity<GameOutput>(gameoutput, HttpStatus.OK);
 	}
 	
 
