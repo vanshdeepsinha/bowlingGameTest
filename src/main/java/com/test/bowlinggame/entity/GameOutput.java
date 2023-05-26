@@ -5,7 +5,6 @@ public class GameOutput {
 	 private Integer score;
 	 private Integer code;
 	 private String message;
-	 private Integer turkeys;
 	 int[] frameScores = new int[10];
 	 
 	 
@@ -32,21 +31,12 @@ public class GameOutput {
 	 public void setMessage(String message) {
 		    this.message = message;
 	  }
-	 
-	 public Integer getTurkeys() {
-			return turkeys;
-	  }
-	 
-	 public void setTurkeys(Integer turkeys) {
-			this.turkeys = turkeys;
-	  }
-	 
+	 	 
 	 public int[] getFrameScores() {
 			return frameScores;
 	  }
 	 
 	 public void setFrameScores(int[] frameScores) {
 			this.frameScores = frameScores;
-	  }
-	 
+	  }	 
 }
